@@ -1,0 +1,71 @@
+# Taśma fabryki w repo projektu. Skopiuj do .github/workflows/factory.yml; to jedyny plik workflowu fabryki
+# w projekcie. Etapy rozdziela dyrygent fabryki (pipeline.yml), więc zmiany taśmy działają bez kopiowania.
+# Plik zmieniasz tylko przy zmianie wersji fabryki (uses i factory_ref) albo ustawień niżej.
+# Wymaga sekretu CLAUDE_CODE_OAUTH_TOKEN (Settings → Secrets and variables → Actions).
+#
+# Przebieg: etykieta `ready` na issue → plan → implementacja (PR z gałęzi factory/*) → recenzja → ocena ryzyka
+# → werdykt mergera. Kolejne etapy uruchamiają się przez workflow_dispatch. Czerwone CI albo prośba recenzenta
+# o zmiany odsyła PR do implementera (do risk.max_review_rounds rund); werdykt powstaje po tej pętli.
+# Komendy w komentarzach: /approve, /reject, /change, /split, /stop <powód> i /start (zatrzymanie taśmy).
+# W Etapie 0 (tryb cienia) fabryka niczego nie scala: o każdym PR decydujesz Ty, a werdykt fabryki oceniasz 👍 albo 👎.
+# Dziennik z metrykami prowadzi przypięte issue „Tryb cienia”. Co kilka scalonych PR przegląd architektury proponuje
+# refaktor jako notatki do backlogu (etykiety idea i refactor); zapis przeglądów jest w issue „Przegląd architektury”.
+# Kolejka: zadanie ponad wip_limit albo ze wspólnymi plikami z zadaniem w toku czeka z etykietą `queued`
+# i rusza samo po zamknięciu PR fabryki (albo przy dziennym przeglądzie).
+name: factory
+# Nazwa przebiegu mówi, który etap ruszył. Dzienny limit (daily_runs) liczy po niej tylko etapy z Claude:
+# plan, implement i review. Kolejka, dziennik i komendy go nie zużywają.
+run-name: >-
+  ${{ github.event_name == 'workflow_dispatch' &&
+      format('factory {0}{1}{2}', inputs.stage, inputs.issue && format(' #{0}', inputs.issue) || '', inputs.pr && format(' PR #{0}', inputs.pr) || '') ||
+      github.event_name == 'issues' && github.event.label.name == 'ready' && format('factory plan #{0}', github.event.issue.number) ||
+      format('factory {0}', github.event_name) }}
+
+on:
+  issues:
+    types: [labeled]
+  issue_comment:
+    types: [created]
+  pull_request_target:
+    types: [closed]   # dziennik i kolejka; kodu z PR nie pobierają
+  schedule:
+    - cron: '17 4 * * *'   # dziennik i kolejka raz dziennie, bo reakcje 👍/👎 nie uruchamiają workflowów
+  workflow_dispatch:
+    inputs:
+      stage:
+        description: 'Etap: plan, implement, review, journal, queue albo architecture'
+        type: string
+        required: true
+      issue: { type: string, default: '' }
+      pr: { type: string, default: '' }
+      note: { type: string, default: '' }
+
+permissions: {}
+
+concurrency:
+  group: factory-${{ github.event.issue.number || inputs.pr || inputs.issue }}-${{ inputs.stage || github.event_name }}
+  cancel-in-progress: false
+
+jobs:
+  factory:
+    uses: gibkigonzo/factory/.github/workflows/pipeline.yml@main
+    with:
+      stage: ${{ inputs.stage }}
+      issue: ${{ inputs.issue }}
+      pr: ${{ inputs.pr }}
+      note: ${{ inputs.note }}
+      factory_ref: main          # ta sama wersja fabryki co w uses
+      runs_on: macos-latest      # implementer i CI: aplikacja na macOS, runner ma też Android SDK i NDK
+      agents_runs_on: ubuntu-latest  # planer, recenzenci i oceniacz ryzyka nie budują projektu
+      # trusted: konto-a,konto-b  # dodatkowe zaufane konta obok właściciela
+      # max_parallel: '3'         # recenzenci naraz
+    secrets:
+      CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+    # Sufit uprawnień dla całej taśmy. Każdy job fabryki bierze z niego tylko to, czego potrzebuje,
+    # a joby z Claude mają tylko prawo odczytu.
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      actions: write
+      checks: write

@@ -1,0 +1,48 @@
+# Kontrakt projektu z fabryką. Zmiana tego pliku jest zawsze High.
+# CI uruchamia wszystkie komendy po kolei na runnerze projektu (macOS), implementer tylko te z listy, dosłownie.
+
+project: factory-dashboard
+extends: [base, typescript, web, rust, tauri]
+
+commands:
+  setup: npm ci && npx playwright install chromium && rustup target add aarch64-linux-android
+  lint: npm run lint # ESLint, Prettier, cargo fmt --check, clippy z błędem na ostrzeżenie
+  typecheck: npm run typecheck # tsc
+  test: npm test # Vitest i cargo test
+  e2e: npm run e2e # Playwright z mockIPC
+  build: npm run build # aplikacja .app na macOS, build debug
+  android: npm run android # APK debug dla arm64; pomija build, gdy PR nie zmienia Rusta, zależności ani projektu Androida
+
+dependencies:
+  add: npm install --save-exact --ignore-scripts
+  add_dev: npm install --save-dev --save-exact --ignore-scripts
+
+zones:
+  security:
+    - 'src-tauri/src/auth/**' # logowanie i token w pęku kluczy
+    - 'src-tauri/src/github/**' # komenda zapytań i lista dozwolonych endpointów
+  shared:
+    - 'src/components/**' # wspólne elementy: shadcn/ui w ui/ i własne aplikacji
+    - 'src/styles/**' # motyw: jedyne źródło tokenów wyglądu
+    - 'design/**' # makiety: wzorzec wyglądu i decyzja właściciela
+  code:
+    - 'src/features/**' # ekrany i komponenty funkcji
+
+# E2E sprawdza ekrany funkcji, choć leży poza ich katalogami.
+zone_tests:
+  code: ['e2e/**']
+
+# Zrzuty ekranów i makiet z design/ w tej samej przeglądarce: <ekran>@<szerokość>.png i .ref.png.
+evidence:
+  screenshots: npm run screenshots
+
+reviewers:
+  extra: [accessibility-web, ux-visual]
+
+# Wykrywanie powtórzeń pomija komponenty biblioteki: są do siebie podobne z założenia.
+quality:
+  ignore:
+    - path: 'src/components/ui/**'
+      reason: komponenty shadcn/ui z generatora biblioteki są do siebie podobne z założenia
+
+wip_limit: 2 # na starcie dużo wspólnych plików; daily_runs i modele z base

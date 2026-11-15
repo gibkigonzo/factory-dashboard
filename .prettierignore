@@ -1,0 +1,10 @@
+dist
+src-tauri/target
+src-tauri/gen
+design
+package-lock.json
+playwright-report
+test-results
+/screenshots
+.github
+.claude
