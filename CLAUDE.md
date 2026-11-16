@@ -18,7 +18,7 @@ Gdy ktoś opisuje pomysł albo zmianę („mam pomysł”, „chcę, żeby…”
 
   Wszystko inne jest w TypeScripcie. Nowy endpoint to zmiana listy dozwolonych, czyli strefa security.
 
-- **Logika fabryki pochodzi z kodu fabryki,** przez zależność npm przypiętą do commita: statusy zadań, koszty i to, które komendy są dozwolone w danym stanie. Aplikacja nie liczy tego po swojemu. Adaptery są w `src/lib/factory/`.
+- **Stan taśmy aplikacja czyta z formatów fabryki** opisanych w jej README (sekcja „Formaty dla narzędzi”): etykiety i gałęzie zadań, komentarz z werdyktem, bloki kosztów, `journal.json`. Odczyt formatów i reguły (kolumna zadania na tablicy, które komendy mają sens) leżą w `src/lib/factory/`, z testami na przykładowych danych. Zasady komend są takie jak w workflowie komend fabryki; taśma i tak sprawdza je po komentarzu.
 - **Dane z GitHuba trzyma TanStack Query:** odpytywanie, cache i odświeżanie w tle, bez własnego mechanizmu odpytywania. Biblioteka stanu globalnego dopiero wtedy, gdy pojawi się stan, którego nie obsłużą Query ani stan komponentu. Taki przypadek planer opisuje w założeniach.
 - **Ekrany obsługuje React Router** (`react-router`), jedna leniwie ładowana trasa na ekran.
 - **Bez serwera i bez webhooków:** stan jest w GitHubie, a aplikacja go odpytuje.
@@ -35,7 +35,7 @@ src/components/ui/        komponenty shadcn/ui: wspólne elementy z biblioteki
 src/components/           własne wspólne elementy aplikacji, np. RiskBadge, VerdictButtons
 src/styles/theme.css      motyw z makiet: jedyne źródło tokenów wyglądu
 src/lib/github/           klient GitHuba nad komendą Rusta
-src/lib/factory/          adaptery kodu fabryki
+src/lib/factory/          odczyt formatów fabryki, kolumny tablicy i reguły komend
 src/mocks/ipc.ts          odpowiedzi komend Rusta dla e2e i zrzutów (VITE_MOCK_IPC)
 src/features/patterns/    strona /patterns z przykładami wspólnych elementów, tylko w dev
 src/router/               trasy ekranów
