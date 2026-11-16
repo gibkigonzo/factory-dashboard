@@ -110,9 +110,9 @@ scripts/android.sh        build APK debug, pomijany bez zmian w Ruście i zależ
 ## Wydania
 
 - **Trunk-based:** `main` to jedyna stała gałąź, a gałęzie `factory/*` żyją do merge'u. Każdy PR zostawia działający `main`. Niegotowy ekran ukrywasz w nawigacji, zamiast trzymać go na długiej gałęzi.
-- **Wersje:** numeracja 0.MINOR.PATCH, a wersja stoi tylko w `package.json`, skąd czyta ją `tauri.conf.json`. Zadania jej nie zmieniają; podbija ją workflow wydania.
+- **Wersje z tagów:** numeracja 0.MINOR.PATCH, a źródłem wersji jest ostatni tag `vX.Y.Z`. Workflow wydania liczy kolejny numer z tego tagu i rodzaju wydania (`/release`, `/release minor`, `/release major`) i wpisuje go do `package.json` tylko na czas budowania, a `tauri.conf.json` czyta go stamtąd. Na `main` nie ma commitów z wersją, więc wydanie działa także z rulesetem bez wyjątków. W repo `package.json` ma wersję `0.0.0`, a pierwsze wydanie dostaje 0.1.0. Zadania wersji nie zmieniają.
 - **Wydanie uruchamia właściciel komendą `/release`.** Fabryka sprawdza, kto pisze, i uruchamia `release.yml`, który:
-  - podbija wersję i zakłada tag `vX.Y.Z`;
+  - liczy wersję z ostatniego tagu i zakłada nowy tag `vX.Y.Z`;
   - buduje `.dmg` na runnerze macOS i podpisany APK;
   - publikuje GitHub Release z listą scalonych PR.
 - **Paczki powstają tylko przy wydaniu.** Po merge'u do `main` nic się nie buduje; PR sprawdza CI taśmy.
