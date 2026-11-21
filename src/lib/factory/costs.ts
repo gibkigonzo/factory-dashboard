@@ -20,10 +20,7 @@ export interface LineProblem {
 }
 
 function texts(body: string, comments: PrComment[]): { text: string; source: Source }[] {
-  return [
-    { text: body, source: 'pr-body' },
-    ...comments.map((c) => ({ text: c.body, source: 'comment' as const })),
-  ]
+  return [{ text: body, source: 'pr-body' }, ...comments.map((c) => ({ text: c.body, source: 'comment' as const }))]
 }
 
 export function parseUsage(pr: PrRef, body: string, comments: PrComment[]): Parsed<UsageRecord[]> {
@@ -50,11 +47,7 @@ export function parseUsage(pr: PrRef, body: string, comments: PrComment[]): Pars
   return { value, problems }
 }
 
-export function parseLineProblems(
-  pr: PrRef,
-  body: string,
-  comments: PrComment[],
-): Parsed<LineProblem[]> {
+export function parseLineProblems(pr: PrRef, body: string, comments: PrComment[]): Parsed<LineProblem[]> {
   const value: LineProblem[] = []
   const problems: Problem[] = []
   for (const { text, source } of texts(body, comments)) {

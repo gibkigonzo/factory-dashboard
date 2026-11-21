@@ -16,19 +16,17 @@ describe('parseUsage', () => {
   })
 
   it('invalid usage block does not stop other blocks of the PR', () => {
-    const body =
-      '<!-- factory:usage [oops -->\n<!-- factory:usage [{"stage":"plan","cost_usd":1}] -->'
+    const body = '<!-- factory:usage [oops -->\n<!-- factory:usage [{"stage":"plan","cost_usd":1}] -->'
     const { value, problems } = parseUsage(pr, body, [])
     expect(value).toHaveLength(1)
     expect(problems).toHaveLength(1)
-    expect(problems[0].source.number).toBe(7)
+    expect(problems[0]?.source.number).toBe(7)
   })
 })
 
 describe('parseLineProblems', () => {
   it('reads line problem with stage, description and time', () => {
-    const body =
-      '<!-- factory:line-problem {"stage":"build","problem":"lint fails","at":"2026-01-02T03:04:05Z"} -->'
+    const body = '<!-- factory:line-problem {"stage":"build","problem":"lint fails","at":"2026-01-02T03:04:05Z"} -->'
     const { value } = parseLineProblems(pr, body, [])
     expect(value).toEqual([
       {

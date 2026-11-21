@@ -23,9 +23,7 @@ export interface Verdicts {
 }
 
 function rate(comment: PrComment, owner: string, pr: PrRef, problems: Problem[]): Rating {
-  const own = new Set(
-    (comment.reactions ?? []).filter((r) => r.user.login === owner).map((r) => r.content),
-  )
+  const own = new Set((comment.reactions ?? []).filter((r) => r.user.login === owner).map((r) => r.content))
   const up = own.has('+1')
   const down = own.has('-1')
   if (up && down) {

@@ -42,6 +42,6 @@ describe('parseVerdicts', () => {
     const result = parseVerdicts(pr, 'o', [comment(1, 1, [react('o', '+1'), react('o', '-1')])])
     expect(result.value.current?.rating).toBe('none')
     expect(result.problems).toHaveLength(1)
-    expect(result.problems[0].source.number).toBe(7)
+    expect(result.problems[0]?.source.number).toBe(7)
   })
 })

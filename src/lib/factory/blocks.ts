@@ -23,7 +23,7 @@ export function extractBlocks(text: string, name: string, pr: PrRef): Parsed<unk
   const problems: Problem[] = []
   for (const match of text.matchAll(pattern)) {
     try {
-      value.push(JSON.parse(match[1]))
+      value.push(JSON.parse(match[1] ?? ''))
     } catch {
       problems.push(prProblem(pr, `Block factory:${name} has invalid JSON`))
     }
