@@ -14,4 +14,6 @@ fi
 
 export NDK_HOME="${NDK_HOME:-${ANDROID_NDK_LATEST_HOME:-${ANDROID_NDK_HOME:-}}}"
 [ -d src-tauri/gen/android ] || npx tauri android init --ci
-npx tauri android build --debug --apk --target aarch64 --ci
+# Android nie przyjmuje wersji 0.0.0 z repo (prawdziwą wersję wpisuje dopiero workflow wydania), więc build debug
+# dostaje tymczasową wersję tylko na czas budowania.
+npx tauri android build --debug --apk --target aarch64 --ci --config '{"version":"0.0.1"}'
