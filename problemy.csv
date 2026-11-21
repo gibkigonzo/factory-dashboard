@@ -1,0 +1,2 @@
+zgloszono,etap,zadanie,pr,problem
+2026-11-17T11:45:49.474Z,implement,3,4,"`npm run lint` kończy się kodem 1: `prettier --check .` zgłasza pliki .factory/work/config.json, issue.md i prompt.md (poza zakresem zadania), więc kroki cargo fmt i clippy się nie wykonują."

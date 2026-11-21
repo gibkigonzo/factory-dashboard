@@ -1,0 +1,9 @@
+zadanie,pr,tytul,stan,poziom,werdykt,ocena,rundy,cofniety,gotowe,scalone,koszt_usd,plan_usd,implementacja_usd,recenzja_usd,ocena_ryzyka_usd,przeglad_architektury_usd,tokeny_wyjscia,recenzent_correctness_usd,recenzent_maintainability_usd,recenzent_security_usd,recenzent_spec_usd,recenzent_tests_usd
+11,,Cache ETag dla odczytów z GitHuba,bez PR (queued),,,,0,nie,2026-11-21T04:58:40Z,,0,,,,,,0,,,,,
+10,,Kolumny tablicy zadań i dostępność komend,bez PR (queued),,,,0,nie,2026-11-21T04:58:38Z,,0,,,,,,0,,,,,
+9,,Projekt Androida i APK debug w CI,bez PR (queued),,,,0,nie,2026-11-21T04:58:34Z,,0,,,,,,0,,,,,
+8,14,Ścisłe CSP i uprawnienia aplikacji,otwarty,High,do Ciebie,,1,nie,2026-11-21T04:58:32Z,,1.5885,0.4317,0.3867,0.6822,0.0879,,23995,0.0862,0.0939,0.2482,0.1308,0.1231
+7,,Komenda zapytań do GitHuba z listą dozwolonych operacji,bez PR (queued),,,,0,nie,2026-11-21T04:58:31Z,,0,,,,,,0,,,,,
+6,,Odczyt dziennika taśmy z journal.json,bez PR (queued),,,,0,nie,2026-11-21T04:58:37Z,,0,,,,,,0,,,,,
+5,,"Odczyt werdyktu trybu cienia, oceny i kosztów z komentarzy",bez PR (queued),,,,0,nie,2026-11-21T04:58:35Z,,0,,,,,,0,,,,,
+3,4,"Odczyt zadań, projektu fabryki i zatrzymania taśmy z danych GitHuba",otwarty,High,do Ciebie,,1,nie,2026-11-17T11:37:07Z,,1.7735,0.3686,0.4631,0.8087,0.1331,,25247,0.1754,0.1013,0.2957,0.1266,0.1097

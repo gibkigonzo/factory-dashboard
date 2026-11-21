@@ -1,0 +1,417 @@
+{
+  "updated": "2026-11-21T05:28:25.332Z",
+  "stopped": null,
+  "tasks": 8,
+  "cost": 3.362,
+  "rows": [
+    {
+      "issue": 11,
+      "title": "Cache ETag dla odczytów z GitHuba",
+      "state": "bez PR (queued)",
+      "rounds": 0,
+      "reverted": false,
+      "usage": [],
+      "cost": 0,
+      "output": 0,
+      "stages": {},
+      "reviewers": {},
+      "readyAt": "2026-11-21T04:58:40Z"
+    },
+    {
+      "issue": 10,
+      "title": "Kolumny tablicy zadań i dostępność komend",
+      "state": "bez PR (queued)",
+      "rounds": 0,
+      "reverted": false,
+      "usage": [],
+      "cost": 0,
+      "output": 0,
+      "stages": {},
+      "reviewers": {},
+      "readyAt": "2026-11-21T04:58:38Z"
+    },
+    {
+      "issue": 9,
+      "title": "Projekt Androida i APK debug w CI",
+      "state": "bez PR (queued)",
+      "rounds": 0,
+      "reverted": false,
+      "usage": [],
+      "cost": 0,
+      "output": 0,
+      "stages": {},
+      "reviewers": {},
+      "readyAt": "2026-11-21T04:58:34Z"
+    },
+    {
+      "pr": 14,
+      "title": "Ścisłe CSP i uprawnienia aplikacji",
+      "state": "otwarty",
+      "rounds": 1,
+      "reverted": false,
+      "usage": [
+        {
+          "stage": "plan",
+          "count": 1,
+          "cost": 0.4317,
+          "turns": 13,
+          "ms": 55110,
+          "input": 4113,
+          "output": 6213,
+          "cacheRead": 119755,
+          "cacheWrite": 36284,
+          "chars": {
+            "thinking": 0,
+            "text": 32,
+            "tools": 5989
+          }
+        },
+        {
+          "stage": "implement",
+          "count": 2,
+          "cost": 0.3867,
+          "turns": 31,
+          "ms": 215043,
+          "input": 11079,
+          "output": 8991,
+          "cacheRead": 556474,
+          "cacheWrite": 62244,
+          "chars": {
+            "thinking": 0,
+            "text": 87,
+            "tools": 13121
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.0862,
+          "turns": 5,
+          "ms": 7554,
+          "input": 4088,
+          "output": 972,
+          "cacheRead": 67473,
+          "cacheWrite": 17392,
+          "name": "correctness",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 772
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.0939,
+          "turns": 5,
+          "ms": 12646,
+          "input": 4635,
+          "output": 1928,
+          "cacheRead": 38269,
+          "cacheWrite": 17650,
+          "name": "maintainability",
+          "chars": {
+            "thinking": 351,
+            "text": 0,
+            "tools": 1522
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.2482,
+          "turns": 8,
+          "ms": 21130,
+          "input": 4215,
+          "output": 1452,
+          "cacheRead": 68078,
+          "cacheWrite": 25700,
+          "name": "security",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 1112
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1308,
+          "turns": 7,
+          "ms": 12144,
+          "input": 4183,
+          "output": 1925,
+          "cacheRead": 75654,
+          "cacheWrite": 25934,
+          "name": "spec",
+          "chars": {
+            "thinking": 0,
+            "text": 1268,
+            "tools": 1442
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1231,
+          "turns": 6,
+          "ms": 13790,
+          "input": 4361,
+          "output": 1843,
+          "cacheRead": 74048,
+          "cacheWrite": 24246,
+          "name": "tests",
+          "chars": {
+            "thinking": 0,
+            "text": 943,
+            "tools": 1127
+          }
+        },
+        {
+          "stage": "assess",
+          "count": 1,
+          "cost": 0.0879,
+          "turns": 6,
+          "ms": 5567,
+          "input": 2521,
+          "output": 671,
+          "cacheRead": 63854,
+          "cacheWrite": 18688,
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 834
+          }
+        }
+      ],
+      "cost": 1.5885,
+      "output": 23995,
+      "stages": {
+        "plan": 0.4317,
+        "implement": 0.3867,
+        "review": 0.6822,
+        "assess": 0.0879
+      },
+      "reviewers": {
+        "correctness": 0.0862,
+        "maintainability": 0.0939,
+        "security": 0.2482,
+        "spec": 0.1308,
+        "tests": 0.1231
+      },
+      "issue": 8,
+      "level": "High",
+      "verdict": "do Ciebie",
+      "readyAt": "2026-11-21T04:58:32Z"
+    },
+    {
+      "issue": 7,
+      "title": "Komenda zapytań do GitHuba z listą dozwolonych operacji",
+      "state": "bez PR (queued)",
+      "rounds": 0,
+      "reverted": false,
+      "usage": [],
+      "cost": 0,
+      "output": 0,
+      "stages": {},
+      "reviewers": {},
+      "readyAt": "2026-11-21T04:58:31Z"
+    },
+    {
+      "issue": 6,
+      "title": "Odczyt dziennika taśmy z journal.json",
+      "state": "bez PR (queued)",
+      "rounds": 0,
+      "reverted": false,
+      "usage": [],
+      "cost": 0,
+      "output": 0,
+      "stages": {},
+      "reviewers": {},
+      "readyAt": "2026-11-21T04:58:37Z"
+    },
+    {
+      "issue": 5,
+      "title": "Odczyt werdyktu trybu cienia, oceny i kosztów z komentarzy",
+      "state": "bez PR (queued)",
+      "rounds": 0,
+      "reverted": false,
+      "usage": [],
+      "cost": 0,
+      "output": 0,
+      "stages": {},
+      "reviewers": {},
+      "readyAt": "2026-11-21T04:58:35Z"
+    },
+    {
+      "pr": 4,
+      "title": "Odczyt zadań, projektu fabryki i zatrzymania taśmy z danych GitHuba",
+      "state": "otwarty",
+      "rounds": 1,
+      "reverted": false,
+      "usage": [
+        {
+          "stage": "plan",
+          "count": 1,
+          "cost": 0.3686,
+          "turns": 8,
+          "ms": 32317,
+          "input": 4068,
+          "output": 4054,
+          "cacheRead": 122390,
+          "cacheWrite": 33596,
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 5599
+          }
+        },
+        {
+          "stage": "implement",
+          "count": 2,
+          "cost": 0.4631,
+          "turns": 36,
+          "ms": 406626,
+          "input": 11093,
+          "output": 12738,
+          "cacheRead": 843824,
+          "cacheWrite": 64005,
+          "chars": {
+            "thinking": 0,
+            "text": 300,
+            "tools": 21061
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1754,
+          "turns": 6,
+          "ms": 13008,
+          "input": 4090,
+          "output": 1882,
+          "cacheRead": 61247,
+          "cacheWrite": 37568,
+          "name": "correctness",
+          "chars": {
+            "thinking": 0,
+            "text": 872,
+            "tools": 1058
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1013,
+          "turns": 6,
+          "ms": 9294,
+          "input": 4639,
+          "output": 1285,
+          "cacheRead": 70862,
+          "cacheWrite": 20274,
+          "name": "maintainability",
+          "chars": {
+            "thinking": 0,
+            "text": 766,
+            "tools": 958
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.2957,
+          "turns": 6,
+          "ms": 9187,
+          "input": 4215,
+          "output": 771,
+          "cacheRead": 57121,
+          "cacheWrite": 33616,
+          "name": "security",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 782
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1266,
+          "turns": 7,
+          "ms": 11148,
+          "input": 4183,
+          "output": 1530,
+          "cacheRead": 75774,
+          "cacheWrite": 25870,
+          "name": "spec",
+          "chars": {
+            "thinking": 0,
+            "text": 628,
+            "tools": 938
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1097,
+          "turns": 5,
+          "ms": 14112,
+          "input": 4361,
+          "output": 2424,
+          "cacheRead": 70046,
+          "cacheWrite": 20329,
+          "name": "tests",
+          "chars": {
+            "thinking": 0,
+            "text": 1567,
+            "tools": 1562
+          }
+        },
+        {
+          "stage": "assess",
+          "count": 1,
+          "cost": 0.1331,
+          "turns": 6,
+          "ms": 5239,
+          "input": 2521,
+          "output": 563,
+          "cacheRead": 53189,
+          "cacheWrite": 30509,
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 597
+          }
+        }
+      ],
+      "cost": 1.7735,
+      "output": 25247,
+      "stages": {
+        "plan": 0.3686,
+        "implement": 0.4631,
+        "review": 0.8087,
+        "assess": 0.1331
+      },
+      "reviewers": {
+        "correctness": 0.1754,
+        "maintainability": 0.1013,
+        "security": 0.2957,
+        "spec": 0.1266,
+        "tests": 0.1097
+      },
+      "issue": 3,
+      "level": "High",
+      "verdict": "do Ciebie",
+      "readyAt": "2026-11-17T11:37:07Z"
+    }
+  ],
+  "lineProblems": [
+    {
+      "stage": "implement",
+      "problem": "`npm run lint` kończy się kodem 1: `prettier --check .` zgłasza pliki .factory/work/config.json, issue.md i prompt.md (poza zakresem zadania), więc kroki cargo fmt i clippy się nie wykonują.",
+      "at": "2026-11-17T11:45:49.474Z",
+      "issue": 3,
+      "pr": 4
+    }
+  ]
+}
