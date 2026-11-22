@@ -8,11 +8,12 @@ fail() {
   exit 1
 }
 
-# Sprawdza zbudowany APK i manifest źródłowy: identyfikator, nazwę, minimalne API, arm64 i uprawnienia.
+# Sprawdza zbudowany APK, a nie manifest źródłowy, bo wtyczki i biblioteki dopisują uprawnienia przy scalaniu
+# manifestów: identyfikator, nazwę, minimalne API, arm64 i uprawnienia (aapt2 dump permissions).
 verify_apk() {
   local apk_root=src-tauri/gen/android/app/build/outputs/apk
   local sdk_root="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}"
-  local apk aapt2 badging manifest permissions
+  local apk aapt2 badging permissions
   apk=$(find "$apk_root" -name '*.apk' -path '*debug*' 2>/dev/null | head -n 1)
   [ -n "$apk" ] || fail "brak APK debug w $apk_root"
 
@@ -30,22 +31,17 @@ verify_apk() {
   grep -q "^native-code: 'arm64-v8a'$" <<<"$badging" ||
     fail "architektura: oczekiwano samego arm64-v8a, znaleziono: $(grep '^native-code:' <<<"$badging")"
 
-  manifest=src-tauri/gen/android/app/src/main/AndroidManifest.xml
-  [ -f "$manifest" ] || fail "brak manifestu $manifest"
-  permissions=$(grep -oE '<uses-permission[^>]*android:name="[^"]+"' "$manifest" |
-    grep -oE 'android:name="[^"]+"' | sed -E 's/android:name="([^"]+)"/\1/' | sort -u)
-  [ "$permissions" = "android.permission.INTERNET" ] ||
-    fail "uprawnienia: oczekiwano samego android.permission.INTERNET, znaleziono: ${permissions:-brak}"
+  permissions=$("$aapt2" dump permissions "$apk" | bash scripts/android-permissions.sh) || exit 1
 
   echo "android: APK $apk"
   grep -E '^(package:|application-label:|sdkVersion:|minSdkVersion:|native-code:)' <<<"$badging" | sed 's/^/android: /'
-  echo "android: uprawnienia: $permissions"
+  echo "$permissions"
 }
 
 base=$(git merge-base origin/main HEAD 2>/dev/null || true)
 if [ -n "$base" ]; then
   changed=$({ git diff --name-only "$base"; git ls-files --others --exclude-standard; } | sort -u)
-  if ! grep -qE '^(src-tauri/|package\.json$|package-lock\.json$|scripts/android\.sh$)' <<<"$changed"; then
+  if ! grep -qE '^(src-tauri/|package\.json$|package-lock\.json$|scripts/android(-permissions)?\.sh$)' <<<"$changed"; then
     echo "android: zmiana nie dotyka Rusta, zależności ani projektu Androida; build pominięty"
     exit 0
   fi
