@@ -7,6 +7,7 @@ extends: [base, typescript, web, rust, tauri]
 commands:
   setup: npm ci && npx playwright install chromium && rustup target add aarch64-linux-android
   lint: npm run lint # ESLint, Prettier, cargo fmt --check, clippy z błędem na ostrzeżenie
+  format: npm run format # Prettier i cargo fmt; uruchamia tylko implementer przed lint, CI go pomija
   typecheck: npm run typecheck # tsc
   test: npm test # Vitest i cargo test
   e2e: npm run e2e # Playwright z mockIPC
