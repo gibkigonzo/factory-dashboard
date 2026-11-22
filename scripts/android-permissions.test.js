@@ -17,11 +17,17 @@ describe('android-permissions.sh', () => {
     expect(result.stdout).toContain('android: uprawnienia: android.permission.INTERNET')
   })
 
-  it('fails and reports found permissions when APK has a permission outside the allowlist', () => {
+  it('passes when APK also has the AndroidX dynamic receiver permission', () => {
     const result = run(header + internet + dynamic)
+    expect(result.status).toBe(0)
+    expect(result.stdout).toContain('DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION')
+  })
+
+  it('fails and reports found permissions when APK has a permission outside the allowlist', () => {
+    const result = run(header + internet + "uses-permission: name='android.permission.CAMERA'\n")
     expect(result.status).toBe(1)
     expect(result.stderr).toContain('android.permission.INTERNET')
-    expect(result.stderr).toContain('DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION')
+    expect(result.stderr).toContain('android.permission.CAMERA')
   })
 
   it('fails when aapt2 output has no permissions', () => {
