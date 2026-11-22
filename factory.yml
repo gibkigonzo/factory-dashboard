@@ -52,4 +52,5 @@ quality:
     - path: 'src/components/ui/**'
       reason: komponenty shadcn/ui z generatora biblioteki są do siebie podobne z założenia
 
-wip_limit: 2 # na starcie dużo wspólnych plików; daily_runs i modele z base
+wip_limit: 2 # na starcie dużo wspólnych plików; modele z base
+daily_runs: 40 # dzienny limit przebiegów z Claude; base ma 20
