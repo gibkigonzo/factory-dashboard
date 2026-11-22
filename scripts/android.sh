@@ -24,8 +24,9 @@ verify_apk() {
     fail "identyfikator: oczekiwano com.gibkigonzo.factorydashboard, znaleziono: $(grep '^package:' <<<"$badging")"
   grep -q "^application-label:'Factory Dashboard'" <<<"$badging" ||
     fail "nazwa aplikacji: oczekiwano 'Factory Dashboard', znaleziono: $(grep '^application-label:' <<<"$badging")"
-  grep -q "^sdkVersion:'24'" <<<"$badging" ||
-    fail "minimalne API: oczekiwano 24, znaleziono: $(grep '^sdkVersion:' <<<"$badging")"
+  # Nowsze aapt2 wypisuje minSdkVersion, starsze sdkVersion.
+  grep -qE "^(min)?[sS]dkVersion:'24'" <<<"$badging" ||
+    fail "minimalne API: oczekiwano 24, znaleziono: $(grep -iE '^(min)?sdkVersion:' <<<"$badging" || echo brak)"
   grep -q "^native-code: 'arm64-v8a'$" <<<"$badging" ||
     fail "architektura: oczekiwano samego arm64-v8a, znaleziono: $(grep '^native-code:' <<<"$badging")"
 
@@ -37,7 +38,7 @@ verify_apk() {
     fail "uprawnienia: oczekiwano samego android.permission.INTERNET, znaleziono: ${permissions:-brak}"
 
   echo "android: APK $apk"
-  grep -E '^(package:|application-label:|sdkVersion:|native-code:)' <<<"$badging" | sed 's/^/android: /'
+  grep -E '^(package:|application-label:|sdkVersion:|minSdkVersion:|native-code:)' <<<"$badging" | sed 's/^/android: /'
   echo "android: uprawnienia: $permissions"
 }
 
