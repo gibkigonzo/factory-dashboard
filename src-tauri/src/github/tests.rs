@@ -464,7 +464,10 @@ fn same_path_with_different_query_has_separate_cache_entry() {
     assert_eq!(server.recorded()[1].if_none_match, None);
     // Repeating the first page revalidates against its own entry.
     assert_eq!(with_page("1").unwrap().body, json!({ "page": 1 }));
-    assert_eq!(server.recorded()[2].if_none_match.as_deref(), Some("\"v1\""));
+    assert_eq!(
+        server.recorded()[2].if_none_match.as_deref(),
+        Some("\"v1\"")
+    );
 }
 
 #[test]
