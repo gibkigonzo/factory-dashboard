@@ -31,6 +31,18 @@ describe('commands', () => {
     expect(commandAvailability('/release', ctx({ place: 'project' }))).toEqual({ available: true })
   })
 
+  it('approve, reject, split and release depend on the place', () => {
+    expect(commandAvailability('/approve', ctx({ place: 'pr' }))).toEqual({ available: true })
+    expect(commandAvailability('/approve', ctx({ place: 'project' }))).toBeNull()
+    expect(commandAvailability('/reject', ctx())).toEqual({ available: true })
+    expect(commandAvailability('/reject', ctx({ place: 'pr' }))).toEqual({ available: true })
+    expect(commandAvailability('/reject', ctx({ place: 'project' }))).toBeNull()
+    expect(commandAvailability('/split', ctx({ place: 'pr' }))).toBeNull()
+    expect(commandAvailability('/split', ctx({ place: 'project' }))).toBeNull()
+    expect(commandAvailability('/release', ctx())).toBeNull()
+    expect(commandAvailability('/release', ctx({ place: 'pr' }))).toBeNull()
+  })
+
   it('stop and start rules', () => {
     expect(commandAvailability('/stop', ctx())).toEqual({ available: true })
     expect(commandAvailability('/stop', ctx({ lineStopped: true }))).toMatchObject({ available: false })

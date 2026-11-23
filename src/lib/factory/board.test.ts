@@ -45,6 +45,17 @@ describe('board columns', () => {
     expect(boardColumn(task(['queued'], { pr: { open: true, verdict } }))).toBe(column)
   })
 
+  it.each([
+    [['blocked'], { pr: { open: true, verdict: 'merge' } }, 'blocked'],
+    [['needs-approval'], { pr: { open: true, verdict: 'merge' } }, 'needs-approval'],
+    [['queued'], { pr: { open: false, verdict: 'merge' } }, 'queued'],
+    [['ready'], { pr: { open: false, verdict: 'escalate' } }, 'ready'],
+    [['queued', 'planned'], {}, 'queued'],
+    [['planned', 'ready'], {}, 'in-progress'],
+  ])('precedence around the factory PR and in-progress rule %j', (labels, extra, column) => {
+    expect(boardColumn(task(labels, extra))).toBe(column)
+  })
+
   it('factory:paused keeps column and sets paused marker', () => {
     expect(boardColumn(task(['ready', 'factory:paused']))).toBe('ready')
     expect(pausedMarker(['ready', 'factory:paused'])).toBe('czeka na wznowienie taśmy')
