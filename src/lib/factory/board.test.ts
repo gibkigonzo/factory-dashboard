@@ -32,6 +32,9 @@ describe('board columns', () => {
     [['idea'], {}, 'new'],
     [['planned'], {}, 'in-progress'],
     [['blocked', 'needs-approval'], {}, 'blocked'],
+    [['blocked'], { state: 'closed' as const }, 'done'],
+    [['blocked', 'rejected'], {}, 'done'],
+    [['blocked', 'rejected'], { pr: { open: true, verdict: 'merge' } }, 'done'],
   ])('label rules map to columns with precedence %j', (labels, extra, column) => {
     expect(boardColumn(task(labels, extra))).toBe(column)
   })
