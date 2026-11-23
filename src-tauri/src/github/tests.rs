@@ -446,6 +446,37 @@ fn new_client_sends_first_get_without_if_none_match() {
 }
 
 #[test]
+fn same_path_with_different_query_has_separate_cache_entry() {
+    let server = TestServer::start_sequence(vec![
+        (200, ETAG_HEADERS, "{\"page\":1}"),
+        (200, ETAG_HEADERS, "{\"page\":2}"),
+        (304, ETAG_HEADERS, ""),
+    ]);
+    let client = GithubClient::new(&server.url);
+    let with_page = |page: &str| {
+        let mut req = request("GET", "/repos/o/r/issues");
+        req.query = vec![("page".to_string(), page.to_string())];
+        client.send_in(&with_token(), req, &utc_plus_one())
+    };
+    assert_eq!(with_page("1").unwrap().body, json!({ "page": 1 }));
+    // A different page must not reuse the first page's ETag.
+    assert_eq!(with_page("2").unwrap().body, json!({ "page": 2 }));
+    assert_eq!(server.recorded()[1].if_none_match, None);
+    // Repeating the first page revalidates against its own entry.
+    assert_eq!(with_page("1").unwrap().body, json!({ "page": 1 }));
+    assert_eq!(server.recorded()[2].if_none_match.as_deref(), Some("\"v1\""));
+}
+
+#[test]
+fn not_modified_without_cache_entry_is_http_error() {
+    let server = TestServer::start(304, ETAG_HEADERS, "");
+    let error = get_repos(&GithubClient::new(&server.url)).unwrap_err();
+    let value = serde_json::to_value(&error).unwrap();
+    assert_eq!(value["kind"], "http");
+    assert_eq!(value["status"], 304);
+}
+
+#[test]
 fn etag_cache_evicts_oldest_over_limit() {
     let mut cache = super::etag::EtagCache::with_limit(2);
     cache.put("a", "1".to_string(), json!(1));
