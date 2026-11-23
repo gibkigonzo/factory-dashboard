@@ -28,8 +28,11 @@ struct Recorded {
     method: String,
     path: String,
     authorization: Option<String>,
+    if_none_match: Option<String>,
     body: String,
 }
+
+type Canned = (u16, &'static [(&'static str, &'static str)], &'static str);
 
 struct TestServer {
     url: String,
@@ -43,11 +46,17 @@ impl TestServer {
         headers: &'static [(&'static str, &'static str)],
         body: &'static str,
     ) -> Self {
+        Self::start_sequence(vec![(status, headers, body)])
+    }
+
+    /// Serves the responses in order; the last one repeats when the list runs out.
+    fn start_sequence(responses: Vec<Canned>) -> Self {
         let listener = TcpListener::bind("127.0.0.1:0").unwrap();
         let url = format!("http://{}", listener.local_addr().unwrap());
         let requests = Arc::new(Mutex::new(Vec::new()));
         let log = Arc::clone(&requests);
         thread::spawn(move || {
+            let mut served = 0usize;
             for stream in listener.incoming() {
                 let Ok(mut stream) = stream else { continue };
                 let mut reader = BufReader::new(stream.try_clone().unwrap());
@@ -59,6 +68,7 @@ impl TestServer {
                 let method = parts.next().unwrap_or("").to_string();
                 let path = parts.next().unwrap_or("").to_string();
                 let mut authorization = None;
+                let mut if_none_match = None;
                 let mut length = 0usize;
                 loop {
                     let mut line = String::new();
@@ -70,6 +80,7 @@ impl TestServer {
                     if let Some((name, value)) = line.split_once(':') {
                         match name.to_ascii_lowercase().as_str() {
                             "authorization" => authorization = Some(value.trim().to_string()),
+                            "if-none-match" => if_none_match = Some(value.trim().to_string()),
                             "content-length" => length = value.trim().parse().unwrap_or(0),
                             _ => {}
                         }
@@ -81,8 +92,11 @@ impl TestServer {
                     method,
                     path,
                     authorization,
+                    if_none_match,
                     body: String::from_utf8_lossy(&payload).to_string(),
                 });
+                let (status, headers, body) = responses[served.min(responses.len() - 1)];
+                served += 1;
                 let mut response = format!(
                     "HTTP/1.1 {status} X\r\nContent-Type: application/json\r\nConnection: close\r\nContent-Length: {}\r\n",
                     body.len()
@@ -358,4 +372,86 @@ fn no_result_contains_token() {
         "network"
     );
     assert_clean(&unreachable);
+}
+
+const ETAG_HEADERS: &[(&str, &str)] = &[("ETag", "\"v1\"")];
+
+fn etag_sequence() -> TestServer {
+    TestServer::start_sequence(vec![
+        (200, ETAG_HEADERS, "{\"n\":1}"),
+        (304, ETAG_HEADERS, ""),
+    ])
+}
+
+fn get_repos(client: &GithubClient) -> Result<GithubResponse, GithubError> {
+    client.send_in(
+        &with_token(),
+        request("GET", "/user/repos"),
+        &utc_plus_one(),
+    )
+}
+
+#[test]
+fn second_get_sends_if_none_match_from_first_etag() {
+    let server = etag_sequence();
+    let client = GithubClient::new(&server.url);
+    get_repos(&client).unwrap();
+    get_repos(&client).unwrap();
+    let recorded = server.recorded();
+    assert_eq!(recorded[0].if_none_match, None);
+    assert_eq!(recorded[1].if_none_match.as_deref(), Some("\"v1\""));
+}
+
+#[test]
+fn not_modified_returns_cached_body() {
+    let server = etag_sequence();
+    let client = GithubClient::new(&server.url);
+    let first = get_repos(&client).unwrap();
+    let second = get_repos(&client).unwrap();
+    assert_eq!(second.status, 200);
+    assert_eq!(second.body, first.body);
+    assert_eq!(second.body, json!({ "n": 1 }));
+}
+
+#[test]
+fn write_requests_bypass_etag_cache() {
+    let writes = [
+        "/repos/o/r/issues/7/comments",
+        "/repos/o/r/issues/7/reactions",
+        "/repos/o/r/issues/7/labels",
+        "/repos/o/r/issues",
+        "/repos/o/r/actions/workflows/ci.yml/dispatches",
+    ];
+    for path in writes {
+        let server = TestServer::start(200, ETAG_HEADERS, "{\"n\":1}");
+        let client = GithubClient::new(&server.url);
+        for _ in 0..2 {
+            client
+                .send_in(&with_token(), request("POST", path), &utc_plus_one())
+                .unwrap();
+        }
+        let recorded = server.recorded();
+        assert_eq!(recorded.len(), 2, "{path}");
+        assert!(recorded.iter().all(|r| r.if_none_match.is_none()), "{path}");
+    }
+}
+
+#[test]
+fn new_client_sends_first_get_without_if_none_match() {
+    let server = etag_sequence();
+    get_repos(&GithubClient::new(&server.url)).unwrap();
+    // A new client is a restarted app: its cache is empty.
+    let _ = get_repos(&GithubClient::new(&server.url));
+    assert_eq!(server.recorded()[1].if_none_match, None);
+}
+
+#[test]
+fn etag_cache_evicts_oldest_over_limit() {
+    let mut cache = super::etag::EtagCache::with_limit(2);
+    cache.put("a", "1".to_string(), json!(1));
+    cache.put("b", "2".to_string(), json!(2));
+    cache.put("c", "3".to_string(), json!(3));
+    assert!(cache.get("a").is_none());
+    assert!(cache.get("b").is_some());
+    assert!(cache.get("c").is_some());
 }

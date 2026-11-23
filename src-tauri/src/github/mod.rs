@@ -2,6 +2,7 @@
 
 mod allowlist;
 mod client;
+mod etag;
 
 pub use client::{GithubClient, GithubError, GithubRequest, GithubResponse};
 

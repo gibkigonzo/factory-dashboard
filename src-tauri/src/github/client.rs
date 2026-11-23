@@ -2,9 +2,11 @@
 
 use super::TokenSource;
 use super::allowlist::is_allowed;
+use super::etag::EtagCache;
 use chrono::{DateTime, Local, TimeZone};
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+use std::sync::Mutex;
 use std::time::Duration;
 
 pub const API_BASE: &str = "https://api.github.com";
@@ -104,9 +106,21 @@ where
     Some(utc.with_timezone(tz).format("%H:%M").to_string())
 }
 
+fn cache_key(request: &GithubRequest) -> String {
+    let mut key = request.path.clone();
+    for (i, (name, value)) in request.query.iter().enumerate() {
+        key.push(if i == 0 { '?' } else { '&' });
+        key.push_str(name);
+        key.push('=');
+        key.push_str(value);
+    }
+    key
+}
+
 pub struct GithubClient {
     base_url: String,
     agent: ureq::Agent,
+    cache: Mutex<EtagCache>,
 }
 
 impl GithubClient {
@@ -118,6 +132,7 @@ impl GithubClient {
         Self {
             base_url: base_url.trim_end_matches('/').to_string(),
             agent,
+            cache: Mutex::new(EtagCache::new()),
         }
     }
 
@@ -154,6 +169,13 @@ impl GithubClient {
         for (key, value) in &request.query {
             call = call.query(key, value);
         }
+        let cache_key = (request.method == "GET").then(|| cache_key(&request));
+        let cached = cache_key
+            .as_ref()
+            .and_then(|key| self.cache.lock().ok()?.get(key));
+        if let Some((etag, _)) = &cached {
+            call = call.set("If-None-Match", etag);
+        }
         let result = match (request.method.as_str(), request.body) {
             ("POST", Some(body)) => call.send_json(body),
             _ => call.call(),
@@ -162,8 +184,20 @@ impl GithubClient {
         match result {
             Ok(response) => {
                 let status = response.status();
+                if status == 304 {
+                    return match cached {
+                        Some((_, body)) => Ok(GithubResponse { status: 200, body }),
+                        None => Err(GithubError::http(304)),
+                    };
+                }
+                let etag = response.header("etag").map(str::to_string);
                 let text = response.into_string().map_err(|_| GithubError::network())?;
-                let body = serde_json::from_str(&text).unwrap_or(Value::Null);
+                let body: Value = serde_json::from_str(&text).unwrap_or(Value::Null);
+                if let (Some(key), Some(etag), 200) = (&cache_key, etag, status)
+                    && let Ok(mut cache) = self.cache.lock()
+                {
+                    cache.put(key, etag, body.clone());
+                }
                 Ok(GithubResponse { status, body })
             }
             Err(ureq::Error::Status(401, _)) => Err(GithubError::invalid_token()),
