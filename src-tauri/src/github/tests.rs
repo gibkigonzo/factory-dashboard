@@ -8,6 +8,7 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 
 const TOKEN: &str = "ghp_secret_token_value";
+const TOKEN_BODY: &str = r#"{"message":"ghp_secret_token_value"}"#;
 const BLOCKED_MESSAGE: &str = "Ta operacja jest zablokowana w aplikacji";
 
 struct MemoryToken(Option<String>);
@@ -27,6 +28,7 @@ struct Recorded {
     method: String,
     path: String,
     authorization: Option<String>,
+    body: String,
 }
 
 struct TestServer {
@@ -79,6 +81,7 @@ impl TestServer {
                     method,
                     path,
                     authorization,
+                    body: String::from_utf8_lossy(&payload).to_string(),
                 });
                 let mut response = format!(
                     "HTTP/1.1 {status} X\r\nContent-Type: application/json\r\nConnection: close\r\nContent-Length: {}\r\n",
@@ -209,6 +212,40 @@ fn allowlist_rejects_traversal_encoded_segments_and_unknown_methods() {
 }
 
 #[test]
+fn post_body_and_query_reach_server() {
+    let server = TestServer::start(200, &[], "{}");
+    let mut post = request("POST", "/repos/o/r/issues");
+    post.query = vec![("a".to_string(), "1".to_string())];
+    send(&server, post).unwrap();
+    let mut get = request("GET", "/repos/o/r/issues");
+    get.query = vec![
+        ("state".to_string(), "open".to_string()),
+        ("page".to_string(), "2".to_string()),
+    ];
+    send(&server, get).unwrap();
+    let recorded = server.recorded();
+    assert_eq!(recorded[0].path, "/repos/o/r/issues?a=1");
+    assert_eq!(recorded[0].body, r#"{"x":1}"#);
+    assert_eq!(recorded[1].path, "/repos/o/r/issues?state=open&page=2");
+    assert_eq!(recorded[1].body, "");
+}
+
+#[test]
+fn redirects_are_not_followed() {
+    let target = TestServer::start(200, &[], "{}");
+    let location: &'static str = Box::leak(format!("{}/steal", target.url).into_boxed_str());
+    let headers: &'static [(&'static str, &'static str)] =
+        Box::leak(vec![("Location", location)].into_boxed_slice());
+    let server = TestServer::start(302, headers, "");
+    let result = send(&server, request("GET", "/user/repos"));
+    if let Ok(response) = result {
+        assert_eq!(response.status, 302);
+    }
+    assert_eq!(server.recorded().len(), 1);
+    assert_eq!(target.recorded().len(), 0);
+}
+
+#[test]
 fn unauthorized_maps_to_invalid_token() {
     let server = TestServer::start(401, &[], "{\"message\":\"Bad credentials\"}");
     let error = send(&server, request("GET", "/user/repos")).unwrap_err();
@@ -282,7 +319,9 @@ fn no_result_contains_token() {
         (500, &[]),
     ];
     for (status, headers) in cases {
-        let server = TestServer::start(status, headers, "{}");
+        // Error responses echo the token, as a hostile or buggy upstream could.
+        let body = if status == 200 { "{}" } else { TOKEN_BODY };
+        let server = TestServer::start(status, headers, body);
         match send(&server, request("GET", "/user/repos")) {
             Ok(response) => assert_clean(&response),
             Err(error) => assert_clean(&error),
