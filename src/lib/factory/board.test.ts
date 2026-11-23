@@ -30,7 +30,7 @@ describe('board columns', () => {
     [['needs-approval', 'ready'], {}, 'needs-approval'],
     [['ready'], {}, 'ready'],
     [['idea'], {}, 'new'],
-    [['planned'], {}, 'in-progress'],
+    [['planned'], {}, 'new'],
     [['blocked', 'needs-approval'], {}, 'blocked'],
     [['blocked'], { state: 'closed' as const }, 'done'],
     [['blocked', 'rejected'], {}, 'done'],
@@ -54,7 +54,7 @@ describe('board columns', () => {
     [['queued'], { pr: { open: false, verdict: 'merge' } }, 'queued'],
     [['ready'], { pr: { open: false, verdict: 'escalate' } }, 'ready'],
     [['queued', 'planned'], {}, 'queued'],
-    [['planned', 'ready'], {}, 'in-progress'],
+    [['planned', 'ready'], {}, 'ready'],
   ])('precedence around the factory PR and in-progress rule %j', (labels, extra, column) => {
     expect(boardColumn(task(labels, extra))).toBe(column)
   })

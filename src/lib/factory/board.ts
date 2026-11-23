@@ -30,7 +30,6 @@ export function boardColumn(input: BoardTaskInput): BoardColumnId {
     return input.pr.verdict === 'merge' || input.pr.verdict === 'escalate' ? 'your-decision' : 'in-progress'
   }
   if (has('queued')) return 'queued'
-  if (has('planned')) return 'in-progress'
   if (has('ready')) return 'ready'
   return 'new'
 }
