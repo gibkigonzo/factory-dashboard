@@ -7,6 +7,7 @@ function comment(id: number, round: number, reactions: PrComment['reactions'] = 
   return {
     id,
     body: `<!-- factory:shadow -->\n<!-- factory:shadow-data {"round":${round},"level":"High","action":"escalate"} -->`,
+    user: { login: 'github-actions[bot]' },
     reactions,
   }
 }
@@ -14,6 +15,21 @@ function comment(id: number, round: number, reactions: PrComment['reactions'] = 
 const react = (login: string, content: string) => ({ user: { login }, content })
 
 describe('parseVerdicts', () => {
+  it('shadow-data block from github-actions[bot] gives a verdict', () => {
+    const { value, problems } = parseVerdicts(pr, 'o', [comment(1, 1)])
+    expect(value.current).toMatchObject({ round: 1, level: 'High' })
+    expect(problems).toEqual([])
+  })
+
+  it('shadow-data block from another author gives no verdict and reports a problem with PR number and login', () => {
+    const forged = { ...comment(1, 1), user: { login: 'mallory' } }
+    const { value, problems } = parseVerdicts(pr, 'o', [forged])
+    expect(value.current).toBeNull()
+    expect(problems).toHaveLength(1)
+    expect(problems[0]?.source).toMatchObject({ kind: 'pr', number: 7 })
+    expect(problems[0]?.reason).toContain('mallory')
+  })
+
   it('reads shadow verdict round, level and action', () => {
     const { value } = parseVerdicts(pr, 'o', [comment(1, 2)])
     expect(value.current).toMatchObject({ round: 2, level: 'High', action: 'escalate' })

@@ -1,4 +1,4 @@
-import { extractBlocks, isRecord, prProblem, type PrRef } from './blocks'
+import { authoredBlocks, isRecord, prProblem, TRUSTED_AUTHORS, type PrRef } from './blocks'
 import type { Parsed, Problem } from './problems'
 
 export type Rating = 'agree' | 'disagree' | 'none'
@@ -6,6 +6,7 @@ export type Rating = 'agree' | 'disagree' | 'none'
 export interface PrComment {
   id: number
   body: string
+  user: { login: string }
   reactions?: { user: { login: string }; content: string }[]
 }
 
@@ -35,12 +36,18 @@ function rate(comment: PrComment, owner: string, pr: PrRef, problems: Problem[])
   return 'none'
 }
 
-export function parseVerdicts(pr: PrRef, owner: string, comments: PrComment[]): Parsed<Verdicts> {
+export function parseVerdicts(
+  pr: PrRef,
+  owner: string,
+  comments: PrComment[],
+  trusted: readonly string[] = TRUSTED_AUTHORS,
+): Parsed<Verdicts> {
   const verdicts: ShadowVerdict[] = []
   const problems: Problem[] = []
   for (const comment of comments) {
-    if (!/<!--\s*factory:shadow\s*-->/.test(comment.body)) continue
-    const blocks = extractBlocks(comment.body, 'shadow-data', pr)
+    const isTrusted = trusted.includes(comment.user.login)
+    if (isTrusted && !/<!--\s*factory:shadow\s*-->/.test(comment.body)) continue
+    const blocks = authoredBlocks(comment.body, comment.user.login, 'shadow-data', pr, trusted)
     problems.push(...blocks.problems)
     for (const block of blocks.value) {
       if (

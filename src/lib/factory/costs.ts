@@ -1,4 +1,4 @@
-import { extractBlocks, isRecord, prProblem, type PrRef } from './blocks'
+import { authoredBlocks, isRecord, prProblem, TRUSTED_AUTHORS, type PrRef } from './blocks'
 import type { Parsed, Problem } from './problems'
 import type { PrComment } from './verdicts'
 
@@ -19,15 +19,28 @@ export interface LineProblem {
   pr: number
 }
 
-function texts(body: string, comments: PrComment[]): { text: string; source: Source }[] {
-  return [{ text: body, source: 'pr-body' }, ...comments.map((c) => ({ text: c.body, source: 'comment' as const }))]
+export interface PrBody {
+  body: string
+  user: { login: string }
 }
 
-export function parseUsage(pr: PrRef, body: string, comments: PrComment[]): Parsed<UsageRecord[]> {
+function texts(body: PrBody, comments: PrComment[]): { text: string; author: string; source: Source }[] {
+  return [
+    { text: body.body, author: body.user.login, source: 'pr-body' },
+    ...comments.map((c) => ({ text: c.body, author: c.user.login, source: 'comment' as const })),
+  ]
+}
+
+export function parseUsage(
+  pr: PrRef,
+  body: PrBody,
+  comments: PrComment[],
+  trusted: readonly string[] = TRUSTED_AUTHORS,
+): Parsed<UsageRecord[]> {
   const value: UsageRecord[] = []
   const problems: Problem[] = []
-  for (const { text, source } of texts(body, comments)) {
-    const blocks = extractBlocks(text, 'usage', pr)
+  for (const { text, author, source } of texts(body, comments)) {
+    const blocks = authoredBlocks(text, author, 'usage', pr, trusted)
     problems.push(...blocks.problems)
     for (const block of blocks.value) {
       if (!Array.isArray(block)) {
@@ -47,11 +60,16 @@ export function parseUsage(pr: PrRef, body: string, comments: PrComment[]): Pars
   return { value, problems }
 }
 
-export function parseLineProblems(pr: PrRef, body: string, comments: PrComment[]): Parsed<LineProblem[]> {
+export function parseLineProblems(
+  pr: PrRef,
+  body: PrBody,
+  comments: PrComment[],
+  trusted: readonly string[] = TRUSTED_AUTHORS,
+): Parsed<LineProblem[]> {
   const value: LineProblem[] = []
   const problems: Problem[] = []
-  for (const { text, source } of texts(body, comments)) {
-    const blocks = extractBlocks(text, 'line-problem', pr)
+  for (const { text, author, source } of texts(body, comments)) {
+    const blocks = authoredBlocks(text, author, 'line-problem', pr, trusted)
     problems.push(...blocks.problems)
     for (const block of blocks.value) {
       const description = isRecord(block) ? (block.problem ?? block.message) : undefined
