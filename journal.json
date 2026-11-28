@@ -1,0 +1,1672 @@
+{
+  "updated": "2026-11-28T13:01:02.194Z",
+  "stopped": null,
+  "tasks": 11,
+  "cost": 25.7618,
+  "rows": [
+    {
+      "pr": 21,
+      "title": "Uprawnienia Androida sprawdzane w zbudowanym APK",
+      "state": "scalony",
+      "rounds": 1,
+      "reverted": false,
+      "usage": [
+        {
+          "stage": "plan",
+          "count": 1,
+          "cost": 0.3202,
+          "turns": 12,
+          "ms": 47321,
+          "input": 4115,
+          "output": 5012,
+          "cacheRead": 170193,
+          "cacheWrite": 23897,
+          "chars": {
+            "thinking": 0,
+            "text": 38,
+            "tools": 5498
+          }
+        },
+        {
+          "stage": "implement",
+          "count": 3,
+          "cost": 0.5715,
+          "turns": 56,
+          "ms": 604887,
+          "input": 16921,
+          "output": 13940,
+          "cacheRead": 1383089,
+          "cacheWrite": 74908,
+          "chars": {
+            "thinking": 0,
+            "text": 873,
+            "tools": 19750
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1739,
+          "turns": 7,
+          "ms": 12572,
+          "input": 4293,
+          "output": 1416,
+          "cacheRead": 97315,
+          "cacheWrite": 37460,
+          "name": "correctness",
+          "chars": {
+            "thinking": 0,
+            "text": 604,
+            "tools": 925
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.0916,
+          "turns": 6,
+          "ms": 9489,
+          "input": 4838,
+          "output": 995,
+          "cacheRead": 68750,
+          "cacheWrite": 18629,
+          "name": "maintainability",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 1117
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.3544,
+          "turns": 8,
+          "ms": 16459,
+          "input": 4418,
+          "output": 1439,
+          "cacheRead": 86835,
+          "cacheWrite": 38558,
+          "name": "security",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 1183
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1158,
+          "turns": 7,
+          "ms": 7569,
+          "input": 4382,
+          "output": 831,
+          "cacheRead": 75534,
+          "cacheWrite": 24929,
+          "name": "spec",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 887
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.118,
+          "turns": 6,
+          "ms": 12895,
+          "input": 4560,
+          "output": 1769,
+          "cacheRead": 73897,
+          "cacheWrite": 23795,
+          "name": "tests",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 1605
+          }
+        },
+        {
+          "stage": "assess",
+          "count": 1,
+          "cost": 0.1388,
+          "turns": 8,
+          "ms": 10938,
+          "input": 2525,
+          "output": 1095,
+          "cacheRead": 108288,
+          "cacheWrite": 29234,
+          "chars": {
+            "thinking": 0,
+            "text": 85,
+            "tools": 1063
+          }
+        }
+      ],
+      "cost": 1.8842,
+      "output": 26497,
+      "stages": {
+        "plan": 0.3202,
+        "implement": 0.5715,
+        "review": 0.8537,
+        "assess": 0.1388
+      },
+      "reviewers": {
+        "correctness": 0.1739,
+        "maintainability": 0.0916,
+        "security": 0.3544,
+        "spec": 0.1158,
+        "tests": 0.118
+      },
+      "issue": 20,
+      "level": "High",
+      "verdict": "do Ciebie",
+      "rating": "up",
+      "readyAt": "2026-11-22T15:50:42Z",
+      "mergedAt": "2026-11-23T12:51:56Z"
+    },
+    {
+      "issue": 19,
+      "title": "Przegląd architektury",
+      "state": "bez PR",
+      "rounds": 0,
+      "reverted": false,
+      "usage": [],
+      "cost": 0,
+      "output": 0,
+      "stages": {},
+      "reviewers": {},
+      "readyAt": "2026-11-22T15:47:59Z"
+    },
+    {
+      "pr": 26,
+      "title": "Bloki fabryki tylko z komentarzy konta taśmy",
+      "state": "scalony",
+      "rounds": 0,
+      "reverted": false,
+      "usage": [
+        {
+          "stage": "plan",
+          "count": 5,
+          "cost": 1.5633,
+          "turns": 63,
+          "ms": 180390,
+          "input": 20575,
+          "output": 20328,
+          "cacheRead": 840749,
+          "cacheWrite": 126959,
+          "chars": {
+            "thinking": 0,
+            "text": 208,
+            "tools": 27652
+          }
+        },
+        {
+          "stage": "implement",
+          "count": 3,
+          "cost": 0.9613,
+          "turns": 59,
+          "ms": 529929,
+          "input": 16479,
+          "output": 34724,
+          "cacheRead": 1442712,
+          "cacheWrite": 120308,
+          "chars": {
+            "thinking": 194,
+            "text": 807,
+            "tools": 64956
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1271,
+          "turns": 7,
+          "ms": 18162,
+          "input": 4170,
+          "output": 1338,
+          "cacheRead": 112662,
+          "cacheWrite": 25556,
+          "name": "correctness",
+          "chars": {
+            "thinking": 0,
+            "text": 518,
+            "tools": 820
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.0973,
+          "turns": 5,
+          "ms": 10388,
+          "input": 4715,
+          "output": 1006,
+          "cacheRead": 70124,
+          "cacheWrite": 19993,
+          "name": "maintainability",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 1215
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.2477,
+          "turns": 6,
+          "ms": 11640,
+          "input": 4293,
+          "output": 1238,
+          "cacheRead": 70354,
+          "cacheWrite": 26130,
+          "name": "security",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 956
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1253,
+          "turns": 7,
+          "ms": 14103,
+          "input": 4261,
+          "output": 1361,
+          "cacheRead": 77051,
+          "cacheWrite": 26713,
+          "name": "spec",
+          "chars": {
+            "thinking": 0,
+            "text": 450,
+            "tools": 715
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1263,
+          "turns": 6,
+          "ms": 17822,
+          "input": 4439,
+          "output": 2013,
+          "cacheRead": 75113,
+          "cacheWrite": 25155,
+          "name": "tests",
+          "chars": {
+            "thinking": 0,
+            "text": 985,
+            "tools": 1170
+          }
+        },
+        {
+          "stage": "assess",
+          "count": 1,
+          "cost": 0.094,
+          "turns": 6,
+          "ms": 8895,
+          "input": 2647,
+          "output": 1333,
+          "cacheRead": 66357,
+          "cacheWrite": 18922,
+          "chars": {
+            "thinking": 357,
+            "text": 0,
+            "tools": 825
+          }
+        }
+      ],
+      "cost": 3.3423,
+      "output": 63341,
+      "stages": {
+        "plan": 1.5633,
+        "implement": 0.9613,
+        "review": 0.7237,
+        "assess": 0.094
+      },
+      "reviewers": {
+        "correctness": 0.1271,
+        "maintainability": 0.0973,
+        "security": 0.2477,
+        "spec": 0.1253,
+        "tests": 0.1263
+      },
+      "issue": 16,
+      "level": "High",
+      "verdict": "do Ciebie",
+      "rating": "up",
+      "readyAt": "2026-11-21T17:08:38Z",
+      "mergedAt": "2026-11-24T14:21:57Z"
+    },
+    {
+      "pr": 27,
+      "title": "Cache ETag dla odczytów z GitHuba",
+      "state": "scalony",
+      "rounds": 2,
+      "reverted": false,
+      "usage": [
+        {
+          "stage": "plan",
+          "count": 1,
+          "cost": 0.3036,
+          "turns": 11,
+          "ms": 31178,
+          "input": 4115,
+          "output": 3855,
+          "cacheRead": 169988,
+          "cacheWrite": 24644,
+          "chars": {
+            "thinking": 0,
+            "text": 63,
+            "tools": 4730
+          }
+        },
+        {
+          "stage": "implement",
+          "count": 3,
+          "cost": 0.6048,
+          "turns": 49,
+          "ms": 319912,
+          "input": 17227,
+          "output": 18385,
+          "cacheRead": 838355,
+          "cacheWrite": 87182,
+          "chars": {
+            "thinking": 0,
+            "text": 100,
+            "tools": 32000
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.2376,
+          "turns": 12,
+          "ms": 34153,
+          "input": 8336,
+          "output": 2339,
+          "cacheRead": 149814,
+          "cacheWrite": 49715,
+          "name": "correctness",
+          "chars": {
+            "thinking": 0,
+            "text": 829,
+            "tools": 1289
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.1908,
+          "turns": 12,
+          "ms": 22800,
+          "input": 9434,
+          "output": 1965,
+          "cacheRead": 140771,
+          "cacheWrite": 39163,
+          "name": "maintainability",
+          "chars": {
+            "thinking": 0,
+            "text": 896,
+            "tools": 1321
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.509,
+          "turns": 15,
+          "ms": 30597,
+          "input": 8592,
+          "output": 3260,
+          "cacheRead": 249121,
+          "cacheWrite": 49274,
+          "name": "security",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 3055
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.2508,
+          "turns": 14,
+          "ms": 21863,
+          "input": 8522,
+          "output": 2159,
+          "cacheRead": 154034,
+          "cacheWrite": 53352,
+          "name": "spec",
+          "chars": {
+            "thinking": 0,
+            "text": 904,
+            "tools": 1560
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.2305,
+          "turns": 10,
+          "ms": 34956,
+          "input": 8872,
+          "output": 2173,
+          "cacheRead": 107988,
+          "cacheWrite": 49358,
+          "name": "tests",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 1992
+          }
+        },
+        {
+          "stage": "assess",
+          "count": 1,
+          "cost": 0.0958,
+          "turns": 6,
+          "ms": 15328,
+          "input": 2647,
+          "output": 1240,
+          "cacheRead": 65858,
+          "cacheWrite": 19673,
+          "chars": {
+            "thinking": 219,
+            "text": 0,
+            "tools": 777
+          }
+        }
+      ],
+      "cost": 2.4229,
+      "output": 35376,
+      "stages": {
+        "plan": 0.3036,
+        "implement": 0.6048,
+        "review": 1.4187,
+        "assess": 0.0958
+      },
+      "reviewers": {
+        "correctness": 0.2376,
+        "maintainability": 0.1908,
+        "security": 0.509,
+        "spec": 0.2508,
+        "tests": 0.2305
+      },
+      "issue": 11,
+      "level": "High",
+      "verdict": "do Ciebie",
+      "rating": "up",
+      "readyAt": "2026-11-21T04:58:40Z",
+      "mergedAt": "2026-11-24T14:24:23Z"
+    },
+    {
+      "pr": 23,
+      "title": "Kolumny tablicy zadań i dostępność komend",
+      "state": "scalony",
+      "rounds": 3,
+      "reverted": false,
+      "usage": [
+        {
+          "stage": "plan",
+          "count": 5,
+          "cost": 1.5577,
+          "turns": 59,
+          "ms": 231744,
+          "input": 20583,
+          "output": 25349,
+          "cacheRead": 977747,
+          "cacheWrite": 110922,
+          "chars": {
+            "thinking": 0,
+            "text": 259,
+            "tools": 31284
+          }
+        },
+        {
+          "stage": "implement",
+          "count": 5,
+          "cost": 1.0336,
+          "turns": 85,
+          "ms": 865884,
+          "input": 28508,
+          "output": 31825,
+          "cacheRead": 2044292,
+          "cacheWrite": 130790,
+          "chars": {
+            "thinking": 0,
+            "text": 611,
+            "tools": 50279
+          }
+        },
+        {
+          "stage": "review",
+          "count": 4,
+          "cost": 0.4598,
+          "turns": 22,
+          "ms": 47537,
+          "input": 16672,
+          "output": 4427,
+          "cacheRead": 271497,
+          "cacheWrite": 96893,
+          "name": "correctness",
+          "chars": {
+            "thinking": 0,
+            "text": 1874,
+            "tools": 2630
+          }
+        },
+        {
+          "stage": "review",
+          "count": 4,
+          "cost": 0.381,
+          "turns": 26,
+          "ms": 47246,
+          "input": 18870,
+          "output": 4081,
+          "cacheRead": 340325,
+          "cacheWrite": 76283,
+          "name": "maintainability",
+          "chars": {
+            "thinking": 195,
+            "text": 1710,
+            "tools": 3326
+          }
+        },
+        {
+          "stage": "review",
+          "count": 4,
+          "cost": 0.7956,
+          "turns": 20,
+          "ms": 21594,
+          "input": 17166,
+          "output": 2509,
+          "cacheRead": 170713,
+          "cacheWrite": 88982,
+          "name": "security",
+          "chars": {
+            "thinking": 0,
+            "text": 132,
+            "tools": 2882
+          }
+        },
+        {
+          "stage": "review",
+          "count": 4,
+          "cost": 0.5262,
+          "turns": 28,
+          "ms": 62634,
+          "input": 17044,
+          "output": 7055,
+          "cacheRead": 305239,
+          "cacheWrite": 106060,
+          "name": "spec",
+          "chars": {
+            "thinking": 0,
+            "text": 3364,
+            "tools": 4449
+          }
+        },
+        {
+          "stage": "review",
+          "count": 4,
+          "cost": 0.5395,
+          "turns": 24,
+          "ms": 74344,
+          "input": 17754,
+          "output": 8184,
+          "cacheRead": 282953,
+          "cacheWrite": 109163,
+          "name": "tests",
+          "chars": {
+            "thinking": 0,
+            "text": 3879,
+            "tools": 5766
+          }
+        },
+        {
+          "stage": "assess",
+          "count": 1,
+          "cost": 0.0838,
+          "turns": 6,
+          "ms": 10018,
+          "input": 2647,
+          "output": 896,
+          "cacheRead": 65460,
+          "cacheWrite": 17557,
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 668
+          }
+        }
+      ],
+      "cost": 5.3772,
+      "output": 84326,
+      "stages": {
+        "plan": 1.5577,
+        "implement": 1.0336,
+        "review": 2.7021,
+        "assess": 0.0838
+      },
+      "reviewers": {
+        "correctness": 0.4598,
+        "maintainability": 0.381,
+        "security": 0.7956,
+        "spec": 0.5262,
+        "tests": 0.5395
+      },
+      "issue": 10,
+      "level": "High",
+      "verdict": "do Ciebie",
+      "rating": "up",
+      "readyAt": "2026-11-21T04:58:38Z",
+      "mergedAt": "2026-11-24T14:23:32Z"
+    },
+    {
+      "pr": 17,
+      "title": "Projekt Androida i APK debug w CI",
+      "state": "scalony",
+      "rounds": 1,
+      "reverted": false,
+      "usage": [
+        {
+          "stage": "plan",
+          "count": 1,
+          "cost": 0.3715,
+          "turns": 14,
+          "ms": 67413,
+          "input": 4117,
+          "output": 7047,
+          "cacheRead": 206721,
+          "cacheWrite": 24517,
+          "chars": {
+            "thinking": 0,
+            "text": 135,
+            "tools": 5299
+          }
+        },
+        {
+          "stage": "implement",
+          "count": 2,
+          "cost": 0.3399,
+          "turns": 25,
+          "ms": 202210,
+          "input": 11075,
+          "output": 7147,
+          "cacheRead": 461072,
+          "cacheWrite": 56121,
+          "chars": {
+            "thinking": 0,
+            "text": 321,
+            "tools": 10696
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1133,
+          "turns": 6,
+          "ms": 13992,
+          "input": 4090,
+          "output": 1884,
+          "cacheRead": 71410,
+          "cacheWrite": 21784,
+          "name": "correctness",
+          "chars": {
+            "thinking": 0,
+            "text": 1223,
+            "tools": 1358
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.0763,
+          "turns": 5,
+          "ms": 7351,
+          "input": 4635,
+          "output": 958,
+          "cacheRead": 38261,
+          "cacheWrite": 15675,
+          "name": "maintainability",
+          "chars": {
+            "thinking": 189,
+            "text": 0,
+            "tools": 671
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1416,
+          "turns": 5,
+          "ms": 10408,
+          "input": 4213,
+          "output": 662,
+          "cacheRead": 37987,
+          "cacheWrite": 15120,
+          "name": "security",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 719
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1111,
+          "turns": 7,
+          "ms": 9994,
+          "input": 4183,
+          "output": 1172,
+          "cacheRead": 73135,
+          "cacheWrite": 22959,
+          "name": "spec",
+          "chars": {
+            "thinking": 0,
+            "text": 468,
+            "tools": 796
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.0978,
+          "turns": 5,
+          "ms": 8631,
+          "input": 4357,
+          "output": 951,
+          "cacheRead": 37983,
+          "cacheWrite": 21057,
+          "name": "tests",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 937
+          }
+        },
+        {
+          "stage": "assess",
+          "count": 1,
+          "cost": 0.0734,
+          "turns": 6,
+          "ms": 8067,
+          "input": 2521,
+          "output": 829,
+          "cacheRead": 61871,
+          "cacheWrite": 14706,
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 713
+          }
+        }
+      ],
+      "cost": 1.3249,
+      "output": 20650,
+      "stages": {
+        "plan": 0.3715,
+        "implement": 0.3399,
+        "review": 0.5401,
+        "assess": 0.0734
+      },
+      "reviewers": {
+        "correctness": 0.1133,
+        "maintainability": 0.0763,
+        "security": 0.1416,
+        "spec": 0.1111,
+        "tests": 0.0978
+      },
+      "issue": 9,
+      "level": "High",
+      "verdict": "do Ciebie",
+      "rating": "up",
+      "readyAt": "2026-11-21T04:58:34Z",
+      "mergedAt": "2026-11-22T15:46:19Z"
+    },
+    {
+      "pr": 14,
+      "title": "Ścisłe CSP i uprawnienia aplikacji",
+      "state": "scalony",
+      "rounds": 2,
+      "reverted": false,
+      "usage": [
+        {
+          "stage": "plan",
+          "count": 1,
+          "cost": 0.4317,
+          "turns": 13,
+          "ms": 55110,
+          "input": 4113,
+          "output": 6213,
+          "cacheRead": 119755,
+          "cacheWrite": 36284,
+          "chars": {
+            "thinking": 0,
+            "text": 32,
+            "tools": 5989
+          }
+        },
+        {
+          "stage": "implement",
+          "count": 3,
+          "cost": 0.4965,
+          "turns": 40,
+          "ms": 302544,
+          "input": 16984,
+          "output": 10946,
+          "cacheRead": 755023,
+          "cacheWrite": 80495,
+          "chars": {
+            "thinking": 0,
+            "text": 241,
+            "tools": 15402
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.1767,
+          "turns": 10,
+          "ms": 18607,
+          "input": 8178,
+          "output": 2406,
+          "cacheRead": 134503,
+          "cacheWrite": 34701,
+          "name": "correctness",
+          "chars": {
+            "thinking": 0,
+            "text": 590,
+            "tools": 1508
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.1833,
+          "turns": 11,
+          "ms": 21008,
+          "input": 9274,
+          "output": 3061,
+          "cacheRead": 106657,
+          "cacheWrite": 35406,
+          "name": "maintainability",
+          "chars": {
+            "thinking": 351,
+            "text": 686,
+            "tools": 2331
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.4786,
+          "turns": 15,
+          "ms": 42037,
+          "input": 8430,
+          "output": 2952,
+          "cacheRead": 135713,
+          "cacheWrite": 49099,
+          "name": "security",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 2364
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.2523,
+          "turns": 14,
+          "ms": 22166,
+          "input": 8366,
+          "output": 3269,
+          "cacheRead": 150736,
+          "cacheWrite": 51002,
+          "name": "spec",
+          "chars": {
+            "thinking": 0,
+            "text": 1771,
+            "tools": 2271
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.2206,
+          "turns": 12,
+          "ms": 26869,
+          "input": 8722,
+          "output": 3432,
+          "cacheRead": 171872,
+          "cacheWrite": 42154,
+          "name": "tests",
+          "chars": {
+            "thinking": 0,
+            "text": 943,
+            "tools": 2643
+          }
+        },
+        {
+          "stage": "assess",
+          "count": 2,
+          "cost": 0.1739,
+          "turns": 13,
+          "ms": 14640,
+          "input": 5046,
+          "output": 1837,
+          "cacheRead": 155720,
+          "cacheWrite": 34958,
+          "chars": {
+            "thinking": 0,
+            "text": 532,
+            "tools": 1711
+          }
+        }
+      ],
+      "cost": 2.4136,
+      "output": 34116,
+      "stages": {
+        "plan": 0.4317,
+        "implement": 0.4965,
+        "review": 1.3115,
+        "assess": 0.1739
+      },
+      "reviewers": {
+        "correctness": 0.1767,
+        "maintainability": 0.1833,
+        "security": 0.4786,
+        "spec": 0.2523,
+        "tests": 0.2206
+      },
+      "issue": 8,
+      "level": "High",
+      "verdict": "do Ciebie",
+      "rating": "up",
+      "readyAt": "2026-11-21T04:58:32Z",
+      "mergedAt": "2026-11-21T16:59:07Z"
+    },
+    {
+      "pr": 24,
+      "title": "Komenda zapytań do GitHuba z listą dozwolonych operacji",
+      "state": "scalony",
+      "rounds": 1,
+      "reverted": false,
+      "usage": [
+        {
+          "stage": "plan",
+          "count": 1,
+          "cost": 0.3102,
+          "turns": 10,
+          "ms": 62191,
+          "input": 4111,
+          "output": 6554,
+          "cacheRead": 99828,
+          "cacheWrite": 20644,
+          "chars": {
+            "thinking": 0,
+            "text": 33,
+            "tools": 6979
+          }
+        },
+        {
+          "stage": "implement",
+          "count": 2,
+          "cost": 0.7287,
+          "turns": 40,
+          "ms": 629026,
+          "input": 11435,
+          "output": 25434,
+          "cacheRead": 1138891,
+          "cacheWrite": 90805,
+          "chars": {
+            "thinking": 0,
+            "text": 294,
+            "tools": 46542
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.3107,
+          "turns": 12,
+          "ms": 36246,
+          "input": 8336,
+          "output": 3461,
+          "cacheRead": 163927,
+          "cacheWrite": 64810,
+          "name": "correctness",
+          "chars": {
+            "thinking": 0,
+            "text": 1061,
+            "tools": 1534
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.2509,
+          "turns": 11,
+          "ms": 30363,
+          "input": 9430,
+          "output": 3086,
+          "cacheRead": 115379,
+          "cacheWrite": 53030,
+          "name": "maintainability",
+          "chars": {
+            "thinking": 198,
+            "text": 825,
+            "tools": 1677
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.6619,
+          "turns": 13,
+          "ms": 44372,
+          "input": 8586,
+          "output": 4715,
+          "cacheRead": 153105,
+          "cacheWrite": 67157,
+          "name": "security",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 2787
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.3302,
+          "turns": 14,
+          "ms": 29230,
+          "input": 8522,
+          "output": 3557,
+          "cacheRead": 169020,
+          "cacheWrite": 69320,
+          "name": "spec",
+          "chars": {
+            "thinking": 0,
+            "text": 1821,
+            "tools": 2368
+          }
+        },
+        {
+          "stage": "review",
+          "count": 2,
+          "cost": 0.3075,
+          "turns": 11,
+          "ms": 38466,
+          "input": 8874,
+          "output": 3765,
+          "cacheRead": 120183,
+          "cacheWrite": 64330,
+          "name": "tests",
+          "chars": {
+            "thinking": 0,
+            "text": 1512,
+            "tools": 2630
+          }
+        },
+        {
+          "stage": "assess",
+          "count": 1,
+          "cost": 0.1729,
+          "turns": 7,
+          "ms": 10586,
+          "input": 2523,
+          "output": 744,
+          "cacheRead": 98202,
+          "cacheWrite": 38879,
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 866
+          }
+        }
+      ],
+      "cost": 3.073,
+      "output": 51316,
+      "stages": {
+        "plan": 0.3102,
+        "implement": 0.7287,
+        "review": 1.8612,
+        "assess": 0.1729
+      },
+      "reviewers": {
+        "correctness": 0.3107,
+        "maintainability": 0.2509,
+        "security": 0.6619,
+        "spec": 0.3302,
+        "tests": 0.3075
+      },
+      "issue": 7,
+      "level": "High",
+      "verdict": "do Ciebie",
+      "rating": "up",
+      "readyAt": "2026-11-21T04:58:31Z",
+      "mergedAt": "2026-11-23T13:44:48Z"
+    },
+    {
+      "pr": 18,
+      "title": "Odczyt dziennika taśmy z journal.json",
+      "state": "scalony",
+      "rounds": 0,
+      "reverted": false,
+      "usage": [
+        {
+          "stage": "plan",
+          "count": 2,
+          "cost": 0.9273,
+          "turns": 33,
+          "ms": 96329,
+          "input": 8242,
+          "output": 9917,
+          "cacheRead": 517354,
+          "cacheWrite": 79675,
+          "chars": {
+            "thinking": 0,
+            "text": 47,
+            "tools": 12433
+          }
+        },
+        {
+          "stage": "implement",
+          "count": 1,
+          "cost": 0.3051,
+          "turns": 16,
+          "ms": 367991,
+          "input": 5431,
+          "output": 9808,
+          "cacheRead": 298842,
+          "cacheWrite": 45003,
+          "chars": {
+            "thinking": 0,
+            "text": 98,
+            "tools": 20742
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1598,
+          "turns": 6,
+          "ms": 9600,
+          "input": 4090,
+          "output": 1451,
+          "cacheRead": 59913,
+          "cacheWrite": 35649,
+          "name": "correctness",
+          "chars": {
+            "thinking": 0,
+            "text": 449,
+            "tools": 688
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.0961,
+          "turns": 7,
+          "ms": 9402,
+          "input": 4639,
+          "output": 958,
+          "cacheRead": 101075,
+          "cacheWrite": 19049,
+          "name": "maintainability",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 1011
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.2531,
+          "turns": 4,
+          "ms": 7202,
+          "input": 4213,
+          "output": 585,
+          "cacheRead": 25003,
+          "cacheWrite": 29558,
+          "name": "security",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 584
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1244,
+          "turns": 7,
+          "ms": 11624,
+          "input": 4183,
+          "output": 1500,
+          "cacheRead": 75398,
+          "cacheWrite": 25410,
+          "name": "spec",
+          "chars": {
+            "thinking": 0,
+            "text": 850,
+            "tools": 1125
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1481,
+          "turns": 5,
+          "ms": 12790,
+          "input": 4361,
+          "output": 1940,
+          "cacheRead": 55764,
+          "cacheWrite": 31538,
+          "name": "tests",
+          "chars": {
+            "thinking": 0,
+            "text": 1180,
+            "tools": 1225
+          }
+        },
+        {
+          "stage": "assess",
+          "count": 1,
+          "cost": 0.1277,
+          "turns": 6,
+          "ms": 6888,
+          "input": 2521,
+          "output": 564,
+          "cacheRead": 51819,
+          "cacheWrite": 29207,
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 607
+          }
+        }
+      ],
+      "cost": 2.1416,
+      "output": 26723,
+      "stages": {
+        "plan": 0.9273,
+        "implement": 0.3051,
+        "review": 0.7815,
+        "assess": 0.1277
+      },
+      "reviewers": {
+        "correctness": 0.1598,
+        "maintainability": 0.0961,
+        "security": 0.2531,
+        "spec": 0.1244,
+        "tests": 0.1481
+      },
+      "issue": 6,
+      "level": "High",
+      "verdict": "do Ciebie",
+      "rating": "up",
+      "readyAt": "2026-11-21T04:58:37Z",
+      "mergedAt": "2026-11-22T15:45:46Z"
+    },
+    {
+      "pr": 15,
+      "title": "Odczyt werdyktu trybu cienia, oceny i kosztów z komentarzy",
+      "state": "scalony",
+      "rounds": 1,
+      "reverted": false,
+      "usage": [
+        {
+          "stage": "plan",
+          "count": 1,
+          "cost": 0.3898,
+          "turns": 11,
+          "ms": 43310,
+          "input": 4117,
+          "output": 4562,
+          "cacheRead": 184067,
+          "cacheWrite": 33342,
+          "chars": {
+            "thinking": 0,
+            "text": 90,
+            "tools": 6411
+          }
+        },
+        {
+          "stage": "implement",
+          "count": 2,
+          "cost": 0.6247,
+          "turns": 56,
+          "ms": 781143,
+          "input": 11117,
+          "output": 19811,
+          "cacheRead": 1288749,
+          "cacheWrite": 76155,
+          "chars": {
+            "thinking": 0,
+            "text": 439,
+            "tools": 32188
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1191,
+          "turns": 6,
+          "ms": 9874,
+          "input": 4090,
+          "output": 1767,
+          "cacheRead": 74375,
+          "cacheWrite": 24481,
+          "name": "correctness",
+          "chars": {
+            "thinking": 0,
+            "text": 524,
+            "tools": 763
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.0971,
+          "turns": 6,
+          "ms": 7125,
+          "input": 4637,
+          "output": 906,
+          "cacheRead": 71081,
+          "cacheWrite": 20183,
+          "name": "maintainability",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 992
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.3204,
+          "turns": 6,
+          "ms": 15751,
+          "input": 4215,
+          "output": 1397,
+          "cacheRead": 55874,
+          "cacheWrite": 35175,
+          "name": "security",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 1664
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1315,
+          "turns": 8,
+          "ms": 8949,
+          "input": 4185,
+          "output": 1068,
+          "cacheRead": 117121,
+          "cacheWrite": 27224,
+          "name": "spec",
+          "chars": {
+            "thinking": 0,
+            "text": 398,
+            "tools": 742
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1757,
+          "turns": 6,
+          "ms": 14216,
+          "input": 4361,
+          "output": 1994,
+          "cacheRead": 62005,
+          "cacheWrite": 37945,
+          "name": "tests",
+          "chars": {
+            "thinking": 0,
+            "text": 882,
+            "tools": 1068
+          }
+        },
+        {
+          "stage": "assess",
+          "count": 1,
+          "cost": 0.1503,
+          "turns": 8,
+          "ms": 10901,
+          "input": 2527,
+          "output": 1068,
+          "cacheRead": 115795,
+          "cacheWrite": 31985,
+          "chars": {
+            "thinking": 0,
+            "text": 405,
+            "tools": 858
+          }
+        }
+      ],
+      "cost": 2.0086,
+      "output": 32573,
+      "stages": {
+        "plan": 0.3898,
+        "implement": 0.6247,
+        "review": 0.8438,
+        "assess": 0.1503
+      },
+      "reviewers": {
+        "correctness": 0.1191,
+        "maintainability": 0.0971,
+        "security": 0.3204,
+        "spec": 0.1315,
+        "tests": 0.1757
+      },
+      "issue": 5,
+      "level": "High",
+      "verdict": "do Ciebie",
+      "rating": "up",
+      "readyAt": "2026-11-21T04:58:35Z",
+      "mergedAt": "2026-11-21T17:01:41Z"
+    },
+    {
+      "pr": 4,
+      "title": "Odczyt zadań, projektu fabryki i zatrzymania taśmy z danych GitHuba",
+      "state": "scalony",
+      "rounds": 1,
+      "reverted": false,
+      "usage": [
+        {
+          "stage": "plan",
+          "count": 1,
+          "cost": 0.3686,
+          "turns": 8,
+          "ms": 32317,
+          "input": 4068,
+          "output": 4054,
+          "cacheRead": 122390,
+          "cacheWrite": 33596,
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 5599
+          }
+        },
+        {
+          "stage": "implement",
+          "count": 2,
+          "cost": 0.4631,
+          "turns": 36,
+          "ms": 406626,
+          "input": 11093,
+          "output": 12738,
+          "cacheRead": 843824,
+          "cacheWrite": 64005,
+          "chars": {
+            "thinking": 0,
+            "text": 300,
+            "tools": 21061
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1754,
+          "turns": 6,
+          "ms": 13008,
+          "input": 4090,
+          "output": 1882,
+          "cacheRead": 61247,
+          "cacheWrite": 37568,
+          "name": "correctness",
+          "chars": {
+            "thinking": 0,
+            "text": 872,
+            "tools": 1058
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1013,
+          "turns": 6,
+          "ms": 9294,
+          "input": 4639,
+          "output": 1285,
+          "cacheRead": 70862,
+          "cacheWrite": 20274,
+          "name": "maintainability",
+          "chars": {
+            "thinking": 0,
+            "text": 766,
+            "tools": 958
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.2957,
+          "turns": 6,
+          "ms": 9187,
+          "input": 4215,
+          "output": 771,
+          "cacheRead": 57121,
+          "cacheWrite": 33616,
+          "name": "security",
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 782
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1266,
+          "turns": 7,
+          "ms": 11148,
+          "input": 4183,
+          "output": 1530,
+          "cacheRead": 75774,
+          "cacheWrite": 25870,
+          "name": "spec",
+          "chars": {
+            "thinking": 0,
+            "text": 628,
+            "tools": 938
+          }
+        },
+        {
+          "stage": "review",
+          "count": 1,
+          "cost": 0.1097,
+          "turns": 5,
+          "ms": 14112,
+          "input": 4361,
+          "output": 2424,
+          "cacheRead": 70046,
+          "cacheWrite": 20329,
+          "name": "tests",
+          "chars": {
+            "thinking": 0,
+            "text": 1567,
+            "tools": 1562
+          }
+        },
+        {
+          "stage": "assess",
+          "count": 1,
+          "cost": 0.1331,
+          "turns": 6,
+          "ms": 5239,
+          "input": 2521,
+          "output": 563,
+          "cacheRead": 53189,
+          "cacheWrite": 30509,
+          "chars": {
+            "thinking": 0,
+            "text": 0,
+            "tools": 597
+          }
+        }
+      ],
+      "cost": 1.7735,
+      "output": 25247,
+      "stages": {
+        "plan": 0.3686,
+        "implement": 0.4631,
+        "review": 0.8087,
+        "assess": 0.1331
+      },
+      "reviewers": {
+        "correctness": 0.1754,
+        "maintainability": 0.1013,
+        "security": 0.2957,
+        "spec": 0.1266,
+        "tests": 0.1097
+      },
+      "issue": 3,
+      "level": "High",
+      "verdict": "do Ciebie",
+      "rating": "up",
+      "readyAt": "2026-11-17T11:37:07Z",
+      "mergedAt": "2026-11-21T15:58:59Z"
+    }
+  ],
+  "lineProblems": [
+    {
+      "stage": "plan",
+      "problem": "W `commands` z `factory.yml` nie ma osobnej komendy testów Rusta (np. `cargo test --manifest-path src-tauri/Cargo.toml --locked`). Jeśli `npm test` jej nie wywołuje, implementer nie może sam uruchomić testów Rusta jako dowodu.",
+      "at": "2026-11-23T13:47:02.873Z",
+      "issue": 11
+    },
+    {
+      "stage": "implement",
+      "problem": "Nie dotyczy: `npm run lint` pada na formatowaniu moich plików, a nie na problemie taśmy.",
+      "at": "2026-11-22T15:53:54.438Z",
+      "issue": 10
+    },
+    {
+      "stage": "implement",
+      "problem": "`npm run lint` kończy się kodem 1: `prettier --check .` zgłasza pliki .factory/work/config.json, issue.md i prompt.md (poza zakresem zadania), więc kroki cargo fmt i clippy się nie wykonują.",
+      "at": "2026-11-17T11:45:49.474Z",
+      "issue": 3,
+      "pr": 4
+    }
+  ]
+}

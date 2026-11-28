@@ -1,0 +1,12 @@
+zadanie,pr,tytul,stan,poziom,werdykt,ocena,rundy,cofniety,gotowe,scalone,koszt_usd,plan_usd,implementacja_usd,recenzja_usd,ocena_ryzyka_usd,przeglad_architektury_usd,tokeny_wyjscia,recenzent_correctness_usd,recenzent_maintainability_usd,recenzent_security_usd,recenzent_spec_usd,recenzent_tests_usd
+20,21,Uprawnienia Androida sprawdzane w zbudowanym APK,scalony,High,do Ciebie,👍,1,nie,2026-11-22T15:50:42Z,2026-11-23T12:51:56Z,1.8842,0.3202,0.5715,0.8537,0.1388,,26497,0.1739,0.0916,0.3544,0.1158,0.118
+19,,Przegląd architektury,bez PR,,,,0,nie,2026-11-22T15:47:59Z,,0,,,,,,0,,,,,
+16,26,Bloki fabryki tylko z komentarzy konta taśmy,scalony,High,do Ciebie,👍,0,nie,2026-11-21T17:08:38Z,2026-11-24T14:21:57Z,3.3423,1.5633,0.9613,0.7237,0.094,,63341,0.1271,0.0973,0.2477,0.1253,0.1263
+11,27,Cache ETag dla odczytów z GitHuba,scalony,High,do Ciebie,👍,2,nie,2026-11-21T04:58:40Z,2026-11-24T14:24:23Z,2.4229,0.3036,0.6048,1.4187,0.0958,,35376,0.2376,0.1908,0.509,0.2508,0.2305
+10,23,Kolumny tablicy zadań i dostępność komend,scalony,High,do Ciebie,👍,3,nie,2026-11-21T04:58:38Z,2026-11-24T14:23:32Z,5.3772,1.5577,1.0336,2.7021,0.0838,,84326,0.4598,0.381,0.7956,0.5262,0.5395
+9,17,Projekt Androida i APK debug w CI,scalony,High,do Ciebie,👍,1,nie,2026-11-21T04:58:34Z,2026-11-22T15:46:19Z,1.3249,0.3715,0.3399,0.5401,0.0734,,20650,0.1133,0.0763,0.1416,0.1111,0.0978
+8,14,Ścisłe CSP i uprawnienia aplikacji,scalony,High,do Ciebie,👍,2,nie,2026-11-21T04:58:32Z,2026-11-21T16:59:07Z,2.4136,0.4317,0.4965,1.3115,0.1739,,34116,0.1767,0.1833,0.4786,0.2523,0.2206
+7,24,Komenda zapytań do GitHuba z listą dozwolonych operacji,scalony,High,do Ciebie,👍,1,nie,2026-11-21T04:58:31Z,2026-11-23T13:44:48Z,3.073,0.3102,0.7287,1.8612,0.1729,,51316,0.3107,0.2509,0.6619,0.3302,0.3075
+6,18,Odczyt dziennika taśmy z journal.json,scalony,High,do Ciebie,👍,0,nie,2026-11-21T04:58:37Z,2026-11-22T15:45:46Z,2.1416,0.9273,0.3051,0.7815,0.1277,,26723,0.1598,0.0961,0.2531,0.1244,0.1481
+5,15,"Odczyt werdyktu trybu cienia, oceny i kosztów z komentarzy",scalony,High,do Ciebie,👍,1,nie,2026-11-21T04:58:35Z,2026-11-21T17:01:41Z,2.0086,0.3898,0.6247,0.8438,0.1503,,32573,0.1191,0.0971,0.3204,0.1315,0.1757
+3,4,"Odczyt zadań, projektu fabryki i zatrzymania taśmy z danych GitHuba",scalony,High,do Ciebie,👍,1,nie,2026-11-17T11:37:07Z,2026-11-21T15:58:59Z,1.7735,0.3686,0.4631,0.8087,0.1331,,25247,0.1754,0.1013,0.2957,0.1266,0.1097

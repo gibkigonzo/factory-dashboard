@@ -1,0 +1,4 @@
+zgloszono,etap,zadanie,pr,problem
+2026-11-23T13:47:02.873Z,plan,11,,"W `commands` z `factory.yml` nie ma osobnej komendy testów Rusta (np. `cargo test --manifest-path src-tauri/Cargo.toml --locked`). Jeśli `npm test` jej nie wywołuje, implementer nie może sam uruchomić testów Rusta jako dowodu."
+2026-11-22T15:53:54.438Z,implement,10,,"Nie dotyczy: `npm run lint` pada na formatowaniu moich plików, a nie na problemie taśmy."
+2026-11-17T11:45:49.474Z,implement,3,4,"`npm run lint` kończy się kodem 1: `prettier --check .` zgłasza pliki .factory/work/config.json, issue.md i prompt.md (poza zakresem zadania), więc kroki cargo fmt i clippy się nie wykonują."
